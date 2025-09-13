@@ -1,0 +1,11 @@
+# смотрим список администраторов
+docker exec grafana grafana-cli admin
+
+# меняем пароль администратора
+docker exec grafana grafana-cli admin reset-admin-password
+
+# проверяем потребляемые ресурсы
+docker stats grafana
+
+#сохраняем статистику по ресурсам в файл
+docker stats grafana --no-stream > stats.txt
