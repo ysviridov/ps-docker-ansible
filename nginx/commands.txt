@@ -1,0 +1,30 @@
+# Создаем каталог с дз и файлы
+mkdir dz-nginx
+cd dz-nginx
+vim index.html
+vim default.conf
+vim Dockerfile
+# Собираем образ
+docker build -t dz-nginx:latest .
+#Проверяем созданный образ
+docker images
+#Запускаем контейнер
+docker run -d --name my-webserver dz-nginx:latest
+docker ps
+#заходим в контейнер и проверяем доступность порта 8080
+docker exec -it my-webserver bash
+curl localhost 80
+Вывод:
+root@388a94fd7767:/# curl localhost 80
+<!DOCTYPE html>
+<html lang="ru">
+        <head>
+                    <meta charset="UTF-8">
+                        <title>Простой пример</title>
+        </head>
+        <body>
+                    <h1>Добро пожаловать!</h1>
+                        <p>Это простой пример страницы index.html.</p>
+        </body>
+</html>
+#
