@@ -1,0 +1,17 @@
+# 5-docker-nginx
+vim Dockerfile
+EXPOSE 80
+docker build -t dz-nginx:latest .
+docker run -d --name=5-dz-nginx -p 8081:80 dz-nginx:latest
+yosviridov@msk1-s-docker01:~/dz/nginx/5-nginx-network$ curl localhost:8081
+<!DOCTYPE html>
+<html lang="ru">
+        <head>
+                    <meta charset="UTF-8">
+                        <title>Простой пример</title>
+        </head>
+        <body>
+                    <h1>Добро пожаловать!</h1>
+                        <p>Это простой пример страницы index.html.</p>
+        </body>
+</html>
