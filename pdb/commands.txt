@@ -1,0 +1,6 @@
+docker pull postgres
+docker run -v /home/yosviridov/data:/data/pg --name db1 -e POSTGRES_PASSWORD=mysecretpassword -d postgres:latest
+ls -la ~/data
+docker rm -f db1
+sudo mv data/ /tmp/
+docker run -v /tmp/data:/data/pg --name db1 -e POSTGRES_PASSWORD=mysecretpassword -d postgres:latest
