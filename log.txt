@@ -1476,3 +1476,4 @@ logger=plugin.installer t=2025-09-13T17:24:26.266357504Z level=info msg="Install
 logger=installer.fs t=2025-09-13T17:24:26.327453924Z level=info msg="Downloaded and extracted grafana-pyroscope-app v1.8.1 zip successfully to /var/lib/grafana/plugins/grafana-pyroscope-app"
 logger=plugins.registration t=2025-09-13T17:24:26.356846687Z level=info msg="Plugin registered" pluginId=grafana-pyroscope-app
 logger=plugin.backgroundinstaller t=2025-09-13T17:24:26.357074656Z level=info msg="Plugin successfully installed" pluginId=grafana-pyroscope-app version= duration=332.580268ms
+logger=infra.usagestats t=2025-09-13T17:24:42.301505795Z level=info msg="Usage stats are ready to report"
