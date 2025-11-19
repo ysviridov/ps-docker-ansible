@@ -1,0 +1,18 @@
+version: "3.8"
+services:   
+  postgres:
+    image: postgres:latest
+    volumes: 
+     - data:/home/yosviridov/data
+    environment:
+      POSTGRES_PASSWORD: dbpassword
+    ports:
+      - "5432:5432"
+    networks:
+      - my-pg-network
+volumes:
+ data:
+
+networks:
+  my-pg-network:
+   driver: bridge
