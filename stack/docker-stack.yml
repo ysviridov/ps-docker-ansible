@@ -1,0 +1,59 @@
+version: "3.8"
+
+# Одна overlay-сеть для всех сервисов
+networks:
+  app-net:
+    driver: overlay
+    attachable: true
+
+# Конфиг для nginx
+configs:
+  nginx_conf:
+    file: ./nginx.conf
+
+# Persist-хранилище для Postgres
+volumes:
+  pgdata:
+    driver: local
+
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    configs:
+      - source: nginx_conf
+        target: /etc/nginx/nginx.conf
+        mode: 0444
+    networks:
+      - app-net
+    deploy:
+      mode: global         # по контейнеру на каждую ноду
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.role == worker   # опционально: только воркеры
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: example
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: exampledb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-net
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.labels.pg == true   # Postgres только на ноде(ах) с этим лейблом
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U example || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
